@@ -1,3 +1,5 @@
+🇧🇷 Leia esta documentação em [Português](README.pt-br.md)
+
 # 📚 Book Scraper Project (Task Submission)
 
 This project is a simplified scraper designed for educational and evaluation purposes. It fetches product listings (books) from the first page of search results based on a keyword provided by the user.
@@ -11,6 +13,7 @@ The goal is to demonstrate full-stack skills by:
 - Creating a backend with **Bun + Express** that performs web scraping using `axios` and `JSDOM`.
 - Building a frontend with **Vite (HTML, CSS, and Vanilla JavaScript)** that interacts with the backend.
 - Displaying the extracted data in a user-friendly format.
+- Providing multilingual support (English, Portuguese and Spanish).
 
 ---
 
@@ -24,6 +27,7 @@ Due to ethical and legal concerns around scraping Amazon (which uses anti-bot pr
 
 - **Backend**: Bun, Express, Axios, JSDOM
 - **Frontend**: Vite, HTML, CSS, JavaScript
+- **Extras**: 🌐 Multilingual interface using pure JS
 
 ---
 
@@ -50,8 +54,8 @@ bun app.js
 
 ```bash
 cd ../frontend
-npm install
-npm run dev
+bun install
+bun run dev
 ```
 
 ---
@@ -69,6 +73,18 @@ npm run dev
    - ⭐ **Rating** (converted from text to stars)
    - 🗣️ **Number of Reviews**
    - 🖼️ **Image**
+
+---
+
+### 🌐 Multilingual Support
+
+The user can dynamically switch the website's language. All interface texts (headings, buttons, placeholders, and search results) are translated.
+
+#### 🌍 Languages Supported
+
+- 🇬🇧 **English** (default)
+- 🇧🇷 **Portuguese**
+- 🇪🇸 **Spanish**
 
 ---
 

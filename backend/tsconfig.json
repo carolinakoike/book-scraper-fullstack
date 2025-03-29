@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    // Ambiente e recursos modernos
     "target": "ESNext",
     "lib": ["ESNext"],
     "module": "ESNext",
@@ -9,25 +8,20 @@
     "verbatimModuleSyntax": true,
     "jsx": "react-jsx",
 
-    // Diretórios
     "outDir": "./dist",
     "allowJs": true,
 
-    // Interoperabilidade e checagem
     "esModuleInterop": true,
     "skipLibCheck": true,
     "strict": true,
 
-    // Boas práticas
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
 
-    // Regras mais estritas (opcional deixar como `false` durante o desenvolvimento)
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noPropertyAccessFromIndexSignature": false,
 
-    // Não emitir JS se estiver usando Bun ou Vite como bundler
     "noEmit": true
   },
   "include": ["./**/*.ts"]

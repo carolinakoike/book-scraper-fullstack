@@ -1,21 +1,56 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
   <head>
+    <!-- 📚 Define a codificação do documento como UTF-8 -->
+    <!-- 📚 Set document encoding to UTF-8 -->
     <meta charset="UTF-8" />
+
+    <!-- 🏷️ Título exibido na aba do navegador -->
+    <!-- 🏷️ Title shown in the browser tab -->
     <title>Book Scraper</title>
+
+    <!-- 📱 Configura a visualização para dispositivos móveis -->
+    <!-- 📱 Set the viewport for responsive design -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- 🎨 Linka o arquivo de estilos CSS -->
+    <!-- 🎨 Link the CSS stylesheet -->
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
+    <!-- 📦 Contêiner principal da aplicação -->
+    <!-- 📦 Main container of the app -->
     <div class="container">
-      <h1>📚 Book Scraper</h1>
-      <div class="search-box">
-        <input type="text" id="search-input" placeholder="Digite o nome do livro..." />
-        <button id="search-button">Buscar</button>
+
+      <!-- 🌐 Seletor de idioma com ícone e opções -->
+      <!-- 🌐 Language selector with icon and options -->
+      <div class="language-select">
+        <label for="language">🌍</label>
+        <select id="language">
+          <option value="en" selected>English</option>
+          <option value="pt">Português</option>
+          <option value="es">Español</option>
+        </select>
       </div>
+
+      <!-- 🧾 Título principal, que muda com o idioma -->
+      <!-- 🧾 Main title, changes with the selected language -->
+      <h1 id="title">📚 Book Scraper</h1>
+
+      <!-- 🔎 Campo de busca e botão -->
+      <!-- 🔎 Search input and button -->
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="Enter a book title..." />
+        <button id="search-button">Search</button>
+      </div>
+
+      <!-- 📊 Local onde os resultados serão exibidos -->
+      <!-- 📊 Area where search results will be displayed -->
       <div class="results"></div>
     </div>
 
+    <!-- 🧠 Importa o script principal da aplicação -->
+    <!-- 🧠 Load the main JavaScript script -->
     <script type="module" src="/main.js"></script>
   </body>
 </html>
