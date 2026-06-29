@@ -59,11 +59,11 @@ Essa decisão mantém o objetivo técnico do desafio, demonstrando a lógica de 
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/carolinakoike/project_task.git
+git clone https://github.com/carolinakoike/book-scraper-fullstack.git
 ```
 
 ```bash
-cd project_task
+cd book-scraper-fullstack
 ```
 
 ### 2. Execute o backend
@@ -182,7 +182,7 @@ O projeto trata cenários comuns de erro, como:
 ## 📁 Estrutura do Projeto
 
 ```text
-project_task/
+book-scraper-fullstack/
 ├── backend/
 │   ├── scraper/
 │   ├── app.js

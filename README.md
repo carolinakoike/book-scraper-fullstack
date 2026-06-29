@@ -59,11 +59,11 @@ This decision keeps the project aligned with the goal of demonstrating scraping 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/carolinakoike/project_task.git
+git clone https://github.com/carolinakoike/book-scraper-fullstack.git
 ```
 
 ```bash
-cd project_task
+cd book-scraper-fullstack
 ```
 
 ### 2. Run the backend
@@ -182,7 +182,7 @@ The project handles common error scenarios, such as:
 ## 📁 Project Structure
 
 ```text
-project_task/
+book-scraper-fullstack/
 ├── backend/
 │   ├── scraper/
 │   ├── app.js
