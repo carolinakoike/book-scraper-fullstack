@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
     resultsContainer.innerHTML = `<p>${t.searching}</p>`;
 
     try {
-      const response = await fetch(`http://localhost:3000/api/scrape?keyword=${keyword}`);
+      const response = await fetch(`http://localhost:3000/api/scrape?keyword=${encodeURIComponent(keyword)}`);
       const data = await response.json();
 
       lastResults = data;

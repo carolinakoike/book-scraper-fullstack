@@ -8,7 +8,23 @@ import { JSDOM } from "jsdom";
 export async function scrapeBooks(keyword: string) {
   // 🌐 URL da primeira página do catálogo do site Books to Scrape
   // 🌐 URL of the first catalogue page of Books to Scrape website
-  const url = `https://books.toscrape.com/catalogue/page-1.html`;
+  const baseUrl = "https://books.toscrape.com/";
+  const catalogueUrl = `${baseUrl}catalogue/page-1.html`;
+  let url = catalogueUrl;
+  let shouldFilterByTitle = true;
+
+  const homeResponse = await axios.get(baseUrl);
+  const homeDom = new JSDOM(homeResponse.data);
+  const categoryLink = Array.from(homeDom.window.document.querySelectorAll(".side_categories a"))
+    .find((link) => link.textContent?.trim().toLowerCase() === keyword.toLowerCase());
+
+  if (categoryLink) {
+    const href = categoryLink.getAttribute("href");
+    if (href) {
+      url = new URL(href, baseUrl).toString();
+      shouldFilterByTitle = false;
+    }
+  }
 
   // 📥 Requisição HTTP para obter o conteúdo HTML da página
   // 📥 HTTP request to fetch the HTML content of the page
@@ -56,18 +72,14 @@ export async function scrapeBooks(keyword: string) {
       // 📄 Se houver link do produto, abre a página de detalhes para obter os reviews
       // 📄 If product link exists, opens the detail page to fetch the number of reviews
       if (productLink) {
-        const detailUrl = `https://books.toscrape.com/catalogue/${productLink.replace("../", "")}`;
+        const detailUrl = new URL(productLink, url).toString();
         try {
           const detailResponse = await axios.get(detailUrl);
           const detailDom = new JSDOM(detailResponse.data);
           const detailDoc = detailDom.window.document;
 
-          // 🔍 Primeira tentativa de localizar o número de reviews diretamente com :contains (não funciona no JSDOM puro, por isso o fallback abaixo)
-          // 🔍 First attempt to find the number of reviews using :contains (doesn’t work in pure JSDOM, hence the fallback below)
-          reviews = detailDoc.querySelector("th:contains('Number of reviews')")?.nextElementSibling?.textContent?.trim() || "0";
-
-          // 🛠️ Fallback: percorre manualmente a tabela procurando a linha "Number of reviews"
-          // 🛠️ Fallback: manually scan the table rows for "Number of reviews"
+          // 🛠️ Percorre manualmente a tabela procurando a linha "Number of reviews"
+          // 🛠️ Manually scan the table rows for "Number of reviews"
           if (!reviews) {
             const tableRows = detailDoc.querySelectorAll("table.table.table-striped tr");
             tableRows.forEach((row) => {
@@ -91,10 +103,13 @@ export async function scrapeBooks(keyword: string) {
         title,
         rating,
         reviews,
-        image: image ? `https://books.toscrape.com/${image.replace("../", "")}` : null,
+        image: image ? new URL(image, url).toString() : null,
       };
     })
   // 🔍 Após coletar todos os livros, filtra os que contêm a palavra-chave no título
   // 🔍 After collecting all books, filter those whose title contains the keyword
-  ).then(results => results.filter(p => p.title?.toLowerCase().includes(keyword.toLowerCase())));
+  ).then(results => shouldFilterByTitle
+    ? results.filter(p => p.title?.toLowerCase().includes(keyword.toLowerCase()))
+    : results
+  );
 }

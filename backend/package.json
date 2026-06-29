@@ -1,6 +1,6 @@
 {
   "name": "task_project_test",
-  "module": "index.ts",
+  "module": "app.js",
   "type": "module",
   "private": true,
   "devDependencies": {
@@ -17,6 +17,6 @@
     "jsdom": "^26.0.0"
   },
   "scripts": {
-    "start": "bun build server.ts --target=bun --outdir=dist && bun dist/server.js"
+    "start": "bun app.js"
   }
 }

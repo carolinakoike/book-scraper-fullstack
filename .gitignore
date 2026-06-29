@@ -25,6 +25,13 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 # caches
 .eslintcache
 .cache
+.pnpm-home
+.pnpm-store
+.home
+.cache-test
+.pnpm-home-test
+.pnpm-store-test
+.home-test
 *.tsbuildinfo
 
 # IntelliJ based IDEs

@@ -82,7 +82,7 @@ body {
     color: #555;
   }
 
-  .lang-select {
+  .language-select {
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -92,7 +92,7 @@ body {
     color: #555;
   }
   
-  .lang-select select {
+  .language-select select {
     padding: 6px 10px;
     border-radius: 6px;
     border: 1px solid #ccc;

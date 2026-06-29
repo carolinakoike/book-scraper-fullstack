@@ -1,109 +1,226 @@
-🇧🇷 Leia esta documentação em [Português](README.pt-br.md)
+🇧🇷 Read this documentation in [Portuguese](README.pt-br.md)
 
-# 📚 Book Scraper Project (Task Submission)
+# 📚 Book Scraper Full-Stack
 
-This project is a simplified scraper designed for educational and evaluation purposes. It fetches product listings (books) from the first page of search results based on a keyword provided by the user.
+A full-stack book scraper built with **Bun**, **Express**, **Axios**, **JSDOM** and **Vite**.
+
+This project was developed as part of a technical challenge and adapted to use [Books to Scrape](https://books.toscrape.com), a public website designed for practicing web scraping techniques safely.
 
 ---
 
 ## 🎯 Objective
 
-The goal is to demonstrate full-stack skills by:
+The goal of this project is to demonstrate full-stack development skills by:
 
-- Creating a backend with **Bun + Express** that performs web scraping using `axios` and `JSDOM`.
-- Building a frontend with **Vite (HTML, CSS, and Vanilla JavaScript)** that interacts with the backend.
-- Displaying the extracted data in a user-friendly format.
-- Providing multilingual support (English, Portuguese and Spanish).
+- Building a backend API with **Bun + Express**;
+- Scraping book data using **Axios** and **JSDOM**;
+- Creating a frontend with **Vite**, **HTML**, **CSS** and **Vanilla JavaScript**;
+- Connecting the frontend to the backend API;
+- Displaying scraped book data in a user-friendly interface;
+- Providing multilingual support in English, Portuguese and Spanish.
 
 ---
 
-## 🚫 Note on Ethics
+## 🚫 Note on Ethical Scraping
 
-Due to ethical and legal concerns around scraping Amazon (which uses anti-bot protections and does not allow scraping through simple HTTP clients), this project was adapted to use [Books to Scrape](https://books.toscrape.com) — a public website intentionally designed for practicing scraping techniques.
+The original challenge proposal involved scraping Amazon search results.
+
+However, Amazon uses anti-bot protections and does not allow scraping through simple HTTP clients. For ethical, legal and technical reasons, this project was adapted to use **Books to Scrape**, a website intentionally created for practicing scraping.
+
+This decision keeps the project aligned with the goal of demonstrating scraping logic without targeting a real commercial platform.
 
 ---
 
 ## 🧩 Tech Stack
 
-- **Backend**: Bun, Express, Axios, JSDOM
-- **Frontend**: Vite, HTML, CSS, JavaScript
-- **Extras**: 🌐 Multilingual interface using pure JS
+### Backend
+
+- Bun
+- Express
+- Axios
+- JSDOM
+
+### Frontend
+
+- Vite
+- HTML
+- CSS
+- JavaScript
+
+### Extra Features
+
+- Multilingual interface using pure JavaScript
+- Error handling for missing keywords and scraping failures
 
 ---
 
 ## 🚀 How to Run the Project
 
-### 1. Clone the Repository
+### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/task_project_test.git
-cd task_project_test
+git clone https://github.com/carolinakoike/project_task.git
 ```
 
-### 2. Install Backend Dependencies
+```bash
+cd project_task
+```
+
+### 2. Run the backend
 
 ```bash
 cd backend
 bun install
-bun app.js
+bun run start
 ```
 
-✅ The backend will be available at `http://localhost:3000`
+The backend will be available at:
 
-### 3. Start the Frontend
+```text
+http://localhost:3000
+```
+
+### 3. Run the frontend
+
+In another terminal, from the project root:
 
 ```bash
-cd ../frontend
+cd frontend
 bun install
 bun run dev
+```
+
+The frontend will be available at:
+
+```text
+http://localhost:5173
 ```
 
 ---
 
 ## 🔍 How It Works
 
-1. User enters a keyword (e.g., `travel`) in the input field.
-2. Frontend sends a request to:  
-   `http://localhost:3000/api/scrape?keyword=travel`
-3. The backend fetches the HTML of  
-   `https://books.toscrape.com/catalogue/page-1.html`, parses it with JSDOM, filters books that match the keyword, and returns the result as JSON.
-4. Frontend displays:
+1. The user enters a keyword, such as `travel`.
+2. The frontend sends a request to the backend:
 
-   - 📘 **Book Title**
-   - ⭐ **Rating** (converted from text to stars)
-   - 🗣️ **Number of Reviews**
-   - 🖼️ **Image**
+```http
+GET http://localhost:3000/api/scrape?keyword=travel
+```
+
+3. The backend checks whether the keyword matches a Books to Scrape category.
+4. If the category exists, the backend scrapes the category page.
+5. If the category does not exist, the backend fetches the first catalogue page and filters books by title.
+6. The backend returns the scraped data as JSON.
+7. The frontend displays the results in the interface.
 
 ---
 
-### 🌐 Multilingual Support
+## 📦 API Endpoint
 
-The user can dynamically switch the website's language. All interface texts (headings, buttons, placeholders, and search results) are translated.
+### Scrape books
 
-#### 🌍 Languages Supported
+```http
+GET /api/scrape?keyword=travel
+```
 
-- 🇬🇧 **English** (default)
-- 🇧🇷 **Portuguese**
-- 🇪🇸 **Spanish**
+Example response:
+
+```json
+[
+  {
+    "title": "It's Only the Himalayas",
+    "rating": "Two",
+    "image": "https://books.toscrape.com/...",
+    "link": "https://books.toscrape.com/..."
+  }
+]
+```
+
+### Error response
+
+When no keyword is provided:
+
+```http
+GET /api/scrape
+```
+
+The backend returns:
+
+```json
+{
+  "error": "Keyword is required"
+}
+```
+
+---
+
+## 🌐 Multilingual Support
+
+The user can switch the interface language dynamically.
+
+Supported languages:
+
+- English
+- Portuguese
+- Spanish
+
+The translated interface includes headings, buttons, placeholders, messages and search result labels.
 
 ---
 
 ## 🛡️ Error Handling
 
-- If no keyword is provided, the backend returns a `400` error with a descriptive message.
-- If scraping fails, a `500` error is returned.
-- The frontend also handles errors gracefully and informs the user.
+The project handles common error scenarios, such as:
+
+- Missing keyword parameter;
+- No books found for the provided keyword;
+- Scraping failures;
+- Backend communication errors.
 
 ---
 
-## 📌 Final Notes
+## 📁 Project Structure
 
-- ✅ This solution strictly follows **all task requirements**.
-- 💡 The code is **commented** and easy to understand.
-- 🧱 The project is modular and can be extended to other websites or features.
+```text
+project_task/
+├── backend/
+│   ├── scraper/
+│   ├── app.js
+│   ├── package.json
+│   └── bun.lock
+├── frontend/
+│   ├── index.html
+│   ├── main.js
+│   ├── style.css
+│   ├── package.json
+│   └── bun.lock
+├── README.md
+├── README.pt-br.md
+└── .gitignore
+```
+
+---
+
+## ✅ Validation
+
+The project was reviewed and validated with the following checks:
+
+- Backend running on `http://localhost:3000`;
+- Frontend running on `http://localhost:5173`;
+- `GET /api/scrape?keyword=travel` returning `200`;
+- `GET /api/scrape` returning `400` for missing keyword;
+- Frontend communicating with the backend successfully.
+
+---
+
+## 📌 Status
+
+Project completed as a technical challenge and kept as a portfolio project.
+
+Future improvements may include pagination, automated tests, loading states, and support for more scraping targets.
 
 ---
 
 ## ✨ Author
 
-Developed with 💜 by **Carolina**
+Developed by **Carolina Koike**.
